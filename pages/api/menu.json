@@ -1,0 +1,15 @@
+[
+    {
+        "menuId": 0,
+        "menuName": "QnA",
+        "url": "/qna"
+    },{
+        "menuId": 1,
+        "menuName": "FAQ",
+        "url": "/faq"
+    },{
+        "menuId": 2,
+        "menuName": "관리자",
+        "url": "/notice"
+    }
+]
