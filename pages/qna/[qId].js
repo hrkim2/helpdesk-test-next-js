@@ -1,30 +1,39 @@
 import Button from '../../Component/button';
 import { useRouter } from 'next/router';
 
-export default function QnaDetail({params}) {
-    const {qId, title, user} = params;
+export default function QnaDetail({data, page}) {
+    const {qId, qTitle, qUser, qDetail} = data.attributes;
     const router = useRouter();
 
     return <div>
         <article>
             <div>글번호 : {qId}</div>
-            <div>제목 : {title}</div>
-            <div>작성자 : {user}</div>
-            <div>글내용~~~~~</div>
+            <div>제목 : {qTitle}</div>
+            <div>작성자 : {qUser}</div>
+            <pre>{qDetail}</pre>
         </article>
         <footer>
             <Button text="목록" className="btn-cancel-outlined" onClickBtn={()=>{
-                router.push(`/qna`);
+                router.push({
+                    pathname: `/qna`,
+                    query: {
+                        page
+                    }
+                },`/qna`);
             }}/>
         </footer>
     </div>;
 }
 
-export function getServerSideProps(data){
+export async function getServerSideProps({query}){
+    const {data} = await(
+        await fetch(`http://localhost:3000/qnas/${query.qId}`)
+    ).json();
 
     return {
         props: {
-            params: data.query
+            data,
+            page: query.page
         }
     }
 }
