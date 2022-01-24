@@ -13,7 +13,7 @@ export default function QnaDetail({data, page}) {
             <pre>{qDetail}</pre>
         </article>
         <footer>
-            <Button text="목록" className="btn-cancel-outlined" onClickBtn={()=>{
+            <Button text="목록" className="btn-action-contained" onClickBtn={()=>{
                 router.push({
                     pathname: `/qna`,
                     query: {

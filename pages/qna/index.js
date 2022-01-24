@@ -12,6 +12,9 @@ export default function QnaHome({meta, data}) {
             }
         },`/qna/${id}`);
     }
+    const createQna = ()=>{
+        router.push('/qna/createQna');
+    }
 
     const {pagination} = meta;
     const [page, setPage] = useState(pagination.page);
@@ -82,6 +85,11 @@ export default function QnaHome({meta, data}) {
                 <option value="102">접수완료</option>
                 <option value="103">답변완료</option>
             </select>
+            <Button
+                text={'새글'}
+                className={'btn-action-outlined'}
+                onClickBtn={()=>createQna()}
+            />
         </div>
         <div className="lineClear"></div>
         <div className="tables">
