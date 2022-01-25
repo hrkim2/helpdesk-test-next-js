@@ -19,7 +19,7 @@ export default function Layout(){
         }
     }
 
-    return <>
+    return <div>
         <div className='header'>
             <Image width={200} height={38.5} src={logo} />
             <h2>IT Help Desk</h2>
@@ -55,7 +55,7 @@ export default function Layout(){
         }
         .header{
             cursor:default;
-            margin-top: 200px;
+            padding-top: 200px;
             width:100%;
             text-align:center;
         }
@@ -66,5 +66,5 @@ export default function Layout(){
             text-align:right;
         }
         `}</style>
-    </>
+    </div>
 }

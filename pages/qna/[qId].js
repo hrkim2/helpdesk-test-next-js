@@ -30,10 +30,18 @@ export async function getServerSideProps({query}){
         await fetch(`http://localhost:3000/qnas/${query.qId}`)
     ).json();
 
-    return {
-        props: {
-            data,
-            page: query.page
+    if(query.page){
+        return {
+            props: {
+                data,
+                page: query.page
+            }
+        }
+    }else{
+        return {
+            props: {
+                data
+            }
         }
     }
 }

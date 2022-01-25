@@ -10,7 +10,7 @@ export default function Layout({children}){
     const curMenu = menuList.filter(menu=>router.asPath.indexOf(menu.url)>=0);
     const pageName = curMenu.length>0 ? curMenu[0].menuName : '';
 
-    return <div>
+    return <div className="authorPageWrapper">
         <NavBar menuList={menuList} curUrl={curMenu[0].url}/>
         <section>
             <Header pageName={pageName}/>

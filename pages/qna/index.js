@@ -1,9 +1,36 @@
 import Button from '../../Component/button';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function QnaHome({meta, data}) {
     const router = useRouter();
+    const {pagination} = meta;
+    const [page, setPage] = useState(pagination.page);
+
+    const tossPageNum = e=>{
+        reloadQna(e.target.value);
+    }
+    const reloadQna = page=>{
+        if(page && page<=pagination.pageCount){
+            setPage(page);
+            router.push({
+                pathname: `/qna`,
+                query: {
+                    page
+                }
+            }, `/qna`);
+        }else{
+            setPage('');
+        }
+    }
+
+    useEffect(()=>{
+        if(page!=pagination.page){
+            reloadQna(pagination.page);
+        }
+    }, [meta]);
+
     const openDetailQustion = (id)=>{
         router.push({
             pathname: `/qna/${id}`,
@@ -12,30 +39,67 @@ export default function QnaHome({meta, data}) {
             }
         },`/qna/${id}`);
     }
-    const createQna = ()=>{
-        router.push('/qna/createQna');
-    }
+    const openQnaForm = (openName)=>{
+        const pathname = '/qna/qnaForm';
+        let checkList;
+        let query;
+        if(openName==='udt'){
+            checkList = Array.from(document.querySelectorAll('.qnaCheck')).filter(c=>{
+                return c.checked;
+            });
+            
+            if(checkList.length==0){
+                alert('수정할 글을 선택하세요');
+                return false;
+            }else if(checkList.length>1){
+                alert('수정할 글을 하나만 선택하세요');
+                return false;
+            }
 
-    const {pagination} = meta;
-    const [page, setPage] = useState(pagination.page);
-    const reloadQna = e=>{
-        const _page = e.target.value;
-        
-        if(_page && _page<=pagination.pageCount){
-            setPage(_page);
-            router.push({
-                pathname: `/qna`,
-                query: {
-                    page: _page
-                }
-            }, `/qna`);
+            query = {
+                openName,
+                id: checkList[0].id.split('-')[1],
+                page
+            }
         }else{
-            setPage('');
+            query = {
+                openName
+            }
+        }
+
+        router.push({pathname, query}, pathname);
+    }
+    const deleteQna = ()=>{
+        const checkList = Array.from(document.querySelectorAll('.qnaCheck')).filter(c=>{
+            return c.checked;
+        });
+
+        if(checkList.length==0){
+            alert('삭제할 글을 선택하세요');
+        }else{
+            let deleteCount=0;
+            checkList.forEach((c, i, ths)=>{
+                axios.delete(`http://localhost:3000/qnas/${c.id.split('-')[1]}`)
+                .then(res=>{
+                    if(res.status===200){
+                        deleteCount++;
+                    }
+                    if(i===ths.length-1){
+                        alert(`${deleteCount}건이 삭제되었습니다.`);
+                        router.push({
+                            pathname: `/qna`,
+                            query: {
+                                page
+                            }
+                        }, `/qna`);
+                    }
+                })
+            });
         }
     }
 
     const thead = <thead align={'center'}><tr>
-        <td key={'0'}><input type="checkbox"/></td>
+        <td key={'0'}><input type='checkbox'/></td>
         <td key={'1'}>번호</td>
         <td key={'2'}>제목</td>
         <td key={'3'}>상태</td>
@@ -49,7 +113,7 @@ export default function QnaHome({meta, data}) {
                 const qStatus = attributes.common_code.data.attributes.codeName;
                 
                 return <tr key={id}>
-                    <td key={id+'0'}><input type="checkbox"/></td>
+                    <td key={id+'0'}><input type="checkbox" id={`check-${id}`} className='qnaCheck'/></td>
                     <td key={id+'1'}>{attributes.qId}</td>
                     <td key={id+'2'} align={'left'} onClick={()=>openDetailQustion(id)}>
                         {attributes.qTitle}<br/>
@@ -88,7 +152,17 @@ export default function QnaHome({meta, data}) {
             <Button
                 text={'새글'}
                 className={'btn-action-outlined'}
-                onClickBtn={()=>createQna()}
+                onClickBtn={()=>openQnaForm('new')}
+            />
+            <Button
+                text={'수정'}
+                className={'btn-action-outlined'}
+                onClickBtn={()=>openQnaForm('udt')}
+            />
+            <Button
+                text={'삭제'}
+                className={'btn-cancel-outlined'}
+                onClickBtn={()=>deleteQna()}
             />
         </div>
         <div className="lineClear"></div>
@@ -100,7 +174,7 @@ export default function QnaHome({meta, data}) {
         </div>
         {pagination.pageCount>0 ? 
             <div className="paging">
-                <input value={page} className="inputPage" onChange={e=>{reloadQna(e)}}/> / {pagination.pageCount} | 총 {pagination.total}건
+                <input value={page} className="inputPage" onChange={e=>{tossPageNum(e)}}/> / {pagination.pageCount} | 총 {pagination.total}건
             </div>
         : ''}
         <style jsx>{`
@@ -120,13 +194,22 @@ export default function QnaHome({meta, data}) {
 
 export async function getServerSideProps({query}){
     const page = query.page ? query.page : 1;
-    const {meta, data} = await(
-        await fetch(`http://localhost:3000/qnas?pagination%5Bpage%5D=${page}`)
-    ).json();
+    let res = await axios.get(`http://localhost:3000/qnas?pagination%5Bpage%5D=${page}`);
+
+    // if(page>1 && res.data.data.length==0){
+    //     res = await axios.get(`http://localhost:3000/qnas?pagination%5Bpage%5D=${page-1}`);
+    // }
+
+    let {meta, data} = res.data;
+
+    if(page>1 && res.data.data.length==0){
+        meta.pagination.page = (page-1);
+    }
 
     return {
         props: {
-            meta, data
+            meta,
+            data
         }
     }
 }
