@@ -9,25 +9,12 @@ export default function QnaHome({meta, data}) {
     const [page, setPage] = useState(pagination.page);
 
     const tossPageNum = e=>{
-        reloadQna(e.target.value);
-    }
-    const reloadQna = page=>{
-        if(page && page<=pagination.pageCount){
-            setPage(page);
-            router.push({
-                pathname: `/qna`,
-                query: {
-                    page
-                }
-            }, `/qna`);
-        }else{
-            setPage('');
-        }
+        searchQna(e.target.value);
     }
 
     useEffect(()=>{
         if(page!=pagination.page){
-            reloadQna(pagination.page);
+            searchQna(pagination.page);
         }
     }, [meta]);
 
@@ -97,6 +84,42 @@ export default function QnaHome({meta, data}) {
             });
         }
     }
+    const searchQna = (page)=>{
+        if(page && page<=pagination.pageCount){
+            setPage(page);
+        }else{
+            setPage('');
+        }
+
+        const select = document.querySelector('#searchKey');
+        const selectedKey = select[select.selectedIndex].value;
+        const value = document.querySelector('[name="searchValue"]').value;
+        
+        const select2 = document.querySelector('#searchStatus');
+        const value2 = select2[select2.selectedIndex].value;
+
+        let query = {page};
+        
+        if(value.length!==0){
+            if(selectedKey==='101'){
+                query['filters[qUser][$containsi]'] = value;
+            }else if(selectedKey==='102'){
+                query['filters[qTitle][$containsi]'] = value;
+            }else if(selectedKey==='103'){
+                query['filters[$or][0][qTitle][$containsi]'] = value;
+                query['filters[$or][1][qDetail][$containsi]'] = value;
+            }
+        }
+
+        if(value2!==''){
+            query['filters[qStatusCd][$eq]'] = value2;
+        }
+
+        router.push({
+            pathname: `/qna`,
+            query
+        }, `/qna`);
+    }
 
     const thead = <thead align={'center'}><tr>
         <td key={'0'}><input type='checkbox'/></td>
@@ -135,15 +158,19 @@ export default function QnaHome({meta, data}) {
 
     return <div>
         <div className="search">
-            <select>
+            <select id="searchKey">
                 <option value="101">작성자</option>
                 <option value="102">제목</option>
                 <option value="103">제목+내용</option>
             </select>
-            <input type="text" name=""></input>
-            <Button text={'검색'} className={'btn-action-contained'}/>
+            <input type="text" name="searchValue"></input>
+            <Button
+                text={'검색'}
+                className={'btn-action-contained'}
+                onClickBtn={()=>searchQna()}
+            />
             <label>상태</label>
-            <select>
+            <select id="searchStatus" onChange={e=>searchQna()}>
                 <option value="">전체</option>
                 <option value="101">접수대기</option>
                 <option value="102">접수완료</option>
@@ -193,16 +220,20 @@ export default function QnaHome({meta, data}) {
 }
 
 export async function getServerSideProps({query}){
+    const queryKeys = Object.keys(query);
     const page = query.page ? query.page : 1;
-    let res = await axios.get(`http://localhost:3000/qnas?pagination%5Bpage%5D=${page}`);
+    let requestUrl = `http://localhost:3000/qnas?pagination%5Bpage%5D=${page}`;
+    
+    queryKeys.forEach(qk=>{
+        if(qk.indexOf('filters')>=0){
+            requestUrl += `&${qk}=${encodeURI(query[qk])}`;
+        }
+    });
 
-    // if(page>1 && res.data.data.length==0){
-    //     res = await axios.get(`http://localhost:3000/qnas?pagination%5Bpage%5D=${page-1}`);
-    // }
-
+    let res = await axios.get(requestUrl);
     let {meta, data} = res.data;
 
-    if(page>1 && res.data.data.length==0){
+    if(page>1 && data.length==0){
         meta.pagination.page = (page-1);
     }
 
