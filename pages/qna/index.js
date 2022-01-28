@@ -2,6 +2,7 @@ import Button from '../../Component/button';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Qna from '../api/Qna';
 
 export default function QnaHome({ meta, data }) {
   const router = useRouter();
@@ -69,7 +70,7 @@ export default function QnaHome({ meta, data }) {
     } else {
       let deleteCount = 0;
       checkList.forEach((c, i, ths) => {
-        axios.delete(`http://localhost:3000/qnas/${c.id.split('-')[1]}`).then((res) => {
+        axios.delete(`/qnas/${c.id.split('-')[1]}`).then((res) => {
           if (res.status === 200) {
             deleteCount++;
           }
@@ -108,16 +109,20 @@ export default function QnaHome({ meta, data }) {
     if (value.length !== 0) {
       if (selectedKey === '101') {
         query['filters[qUser][$containsi]'] = value;
+        //filter = {'qUser': [value, 'like']}
       } else if (selectedKey === '102') {
         query['filters[qTitle][$containsi]'] = value;
+        //filter = {'qTitle': [value, 'like']}
       } else if (selectedKey === '103') {
         query['filters[$or][0][qTitle][$containsi]'] = value;
         query['filters[$or][1][qDetail][$containsi]'] = value;
+        //filter = {or: {qTitle: [value, 'like'], qDetail: [value, 'like']}}
       }
     }
 
     if (value2 !== '') {
       query['filters[qStatusCd][$eq]'] = value2;
+      //filter = {앞에꺼, 'qStatusCd': [value2, 'eq']}
     }
 
     router.push(
@@ -246,7 +251,7 @@ export default function QnaHome({ meta, data }) {
 export async function getServerSideProps({ query }) {
   const queryKeys = Object.keys(query);
   const page = query.page ? query.page : 1;
-  let requestUrl = `http://localhost:3000/qnas?pagination%5Bpage%5D=${page}`;
+  let requestUrl = `http://localhost:3000/qnas?pagination[page]=${page}&pagination%5BpageSize%5D=5&fields=qId%2CqTitle%2CqUser%2CqStatusCd%2CregistDate%2CreadCount&populate=common_code&sort=id:desc`;
 
   queryKeys.forEach((qk) => {
     if (qk.indexOf('filters') >= 0) {
@@ -254,7 +259,18 @@ export async function getServerSideProps({ query }) {
     }
   });
 
-  let res = await axios.get(requestUrl);
+  let res = await Qna.getQnas({
+    pagination: {
+      page,
+    },
+    filter: {
+      or: [
+        ['qTitle', 'value', 'like'],
+        ['qDetail', 'value', 'like'],
+      ],
+      qStatusCd: ['value2', 'eq'],
+    },
+  }); //await axios.get(requestUrl);
   let { meta, data } = res.data;
 
   if (page > 1 && data.length == 0) {
