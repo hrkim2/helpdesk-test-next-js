@@ -8,7 +8,7 @@ export default function App({Component, pageProps}) {
   const path = router.asPath;
 
   return (path==='/' ? 
-  <Login />:<Layout session={pageProps.session}>
+  <Login />:<Layout>
     <Component {...pageProps} />
   </Layout>);
 }
