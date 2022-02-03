@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { QueryManager } from './queryManager/strapi';
 
 const BASE_URL = 'http://localhost:3000/';
 
@@ -11,4 +12,4 @@ const AxiosInstance = axios.create({
   },
 });
 
-export default AxiosInstance;
+export { QueryManager, AxiosInstance };

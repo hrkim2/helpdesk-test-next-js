@@ -1,0 +1,25 @@
+export default class Manager {
+  pagination;
+  sort;
+  fields;
+  filter;
+
+  constructor(query, option) {
+    if (query) {
+      this.pagination =
+        option && option.pageSize ? Object.assign(query.pagination, { pageSize: option.pageSize }) : query.pagination;
+      this.sort = query.sort || option.sort;
+      if (!query.fields) {
+        this.fields = option.fields || '*';
+      } else {
+        this.fields = query.fields;
+      }
+      this.filter = query.filter;
+    }
+  }
+
+  getPagination() {}
+  getSort() {}
+  getFields() {}
+  getFilter() {}
+}
