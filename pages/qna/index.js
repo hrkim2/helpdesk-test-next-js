@@ -1,8 +1,7 @@
 import Button from '../../Component/button';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { getQnas } from '../api/Qna';
+import { getQnas, deleteQnas } from '../api/Qna';
 
 export default function QnaHome({ meta, data }) {
   const router = useRouter();
@@ -60,7 +59,7 @@ export default function QnaHome({ meta, data }) {
 
     router.push({ pathname, query }, pathname);
   };
-  const deleteQna = () => {
+  const deleteQna = async () => {
     const checkList = Array.from(document.querySelectorAll('.qnaCheck')).filter((c) => {
       return c.checked;
     });
@@ -68,26 +67,14 @@ export default function QnaHome({ meta, data }) {
     if (checkList.length == 0) {
       alert('삭제할 글을 선택하세요');
     } else {
-      let deleteCount = 0;
-      checkList.forEach((c, i, ths) => {
-        axios.delete(`/qnas/${c.id.split('-')[1]}`).then((res) => {
-          if (res.status === 200) {
-            deleteCount++;
-          }
-          if (i === ths.length - 1) {
-            alert(`${deleteCount}건이 삭제되었습니다.`);
-            router.push(
-              {
-                pathname: `/qna`,
-                query: {
-                  page,
-                },
-              },
-              `/qna`,
-            );
-          }
-        });
+      const temp = checkList.map((checkItem) => {
+        return checkItem.id.split('-')[1];
       });
+      const deleteNum = await deleteQnas(temp);
+      const msg = temp.length === deleteNum ? '' : '일부 삭제되지 않은 게시물이 있습니다.';
+      if (!alert(`${deleteNum}건의 게시물이 삭제되었습니다.\n${msg}`)) {
+        searchQna(page);
+      }
     }
   };
   const searchQna = (page) => {
