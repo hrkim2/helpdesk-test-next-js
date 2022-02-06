@@ -44,3 +44,14 @@ Next.js
 ### 2.3
 
 - api 로직을 분리하여 back-end 서비스 변경시 최소 수정을 유도
+
+### 2.4
+
+- delete 여러개 했을 때 api에서 상태값 받아 성공적으로 처리된게 몇건인지 연산하여 리턴하는 로직 추가
+
+### 2.6
+
+- git branch test
+  - git branch ts-test
+  - git checkout ts-test
+- 신규 branch에 ts 작업 내용 반영 예정
