@@ -6,11 +6,11 @@ import logo from '../public/SG_Logo_Default.png';
 export default function Layout(){
     const router = useRouter();
 
-    function login(e){
+    function login(e: MouseEvent & {target: EventTarget }){
         e.preventDefault();
         const frm = e.target.form;
-        const user = frm.querySelector('#user').value;
-        const password = frm.querySelector('#password').value;
+        const user = (frm.querySelector('#user') as HTMLInputElement)?.value;
+        const password = (frm.querySelector('#password') as HTMLInputElement)?.value;
 
         if((user.length*password.length>0) && (user==='admin' && password==='123')){
             router.push('/qna');

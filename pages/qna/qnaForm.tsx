@@ -1,24 +1,24 @@
 import Button from '../../Component/button';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
 
-export default function CreateQna({ data, page }) {
+export default function CreateQna({ data, page }: any) {
   const router = useRouter();
   const [qna, setQna] = useState(data ? data.attributes : undefined);
 
-  function updateInputform(e) {
+  function updateInputform(e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
     setQna({ [e.target.name]: e.target.value });
   }
 
-  function submitData(update) {
-    const title = document.querySelector('#title').value;
-    const detail = document.querySelector('#detail').value;
+  function submitData(update: boolean) {
+    const title = (document.querySelector('#title') as HTMLInputElement)?.value;
+    const detail = (document.querySelector('#detail') as HTMLTextAreaElement)?.value;
 
     if (title.length * detail.length > 0) {
       if (!update) {
         axios.get('/qnas').then((res) => {
-          const qIdList = res.data.data.map((d) => d.attributes.qId);
+          const qIdList = res.data.data.map((d: { attributes: { qId: any; }; }) => d.attributes.qId);
           const qId = qIdList.length > 0 ? Math.max(...qIdList) + 1 : 1;
 
           axios
@@ -128,7 +128,7 @@ export default function CreateQna({ data, page }) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query }: any) {
   const { openName, id, page } = query;
 
   if (openName === 'udt') {

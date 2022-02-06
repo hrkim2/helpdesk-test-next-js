@@ -3,7 +3,13 @@ import Link from 'next/link';
 import logo from '../public/SG_Logo_Default.png';
 import { useState } from 'react';
 
-export default function NavBar({menuList, curUrl}){
+type menuType = {
+    url: string;
+    menuId: number;
+    menuName: string;
+}
+
+export default function NavBar({menuList, curUrl}:any){
     let [showList, setShowList] = useState('showList');
 
     function toggleList(){
@@ -21,7 +27,7 @@ export default function NavBar({menuList, curUrl}){
             <button className='navToggle' onClick={()=>toggleList()}>📚</button>
         </div>
         <ul className={showList}>
-        {menuList.map(menu=>{
+        {menuList.map((menu:menuType)=>{
             return <Link href={menu.url} key={menu.menuId}>
                 <li className={curUrl===menu.url ? 'active': ''}>
                     {menu.menuName}

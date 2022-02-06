@@ -1,15 +1,15 @@
 import Button from '../../Component/button';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import { getQnas, deleteQnas } from '../api/Qna';
 
-export default function QnaHome({ meta, data }) {
+export default function QnaHome({ meta, data }: any) {
   const router = useRouter();
   const { pagination } = meta;
   const [page, setPage] = useState(pagination.page);
 
-  const tossPageNum = (e) => {
-    searchQna(e.target.value);
+  const tossPageNum = (e: ChangeEvent & {target: HTMLInputElement}) => {
+    searchQna(parseInt(e.target.value));
   };
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function QnaHome({ meta, data }) {
     }
   }, [meta]);
 
-  const openDetailQustion = (id) => {
+  const openDetailQustion = (id: string) => {
     router.push(
       {
         pathname: `/qna/${id}`,
@@ -29,13 +29,13 @@ export default function QnaHome({ meta, data }) {
       `/qna/${id}`,
     );
   };
-  const openQnaForm = (openName) => {
+  const openQnaForm = (openName: string) => {
     const pathname = '/qna/qnaForm';
     let checkList;
     let query;
     if (openName === 'udt') {
       checkList = Array.from(document.querySelectorAll('.qnaCheck')).filter((c) => {
-        return c.checked;
+        return (c as HTMLInputElement).checked;
       });
 
       if (checkList.length == 0) {
@@ -61,7 +61,7 @@ export default function QnaHome({ meta, data }) {
   };
   const deleteQna = async () => {
     const checkList = Array.from(document.querySelectorAll('.qnaCheck')).filter((c) => {
-      return c.checked;
+      return (c as HTMLInputElement).checked;
     });
 
     if (checkList.length == 0) {
@@ -72,26 +72,32 @@ export default function QnaHome({ meta, data }) {
       });
       const deleteNum = await deleteQnas(temp);
       const msg = temp.length === deleteNum ? '' : '일부 삭제되지 않은 게시물이 있습니다.';
-      if (!alert(`${deleteNum}건의 게시물이 삭제되었습니다.\n${msg}`)) {
-        searchQna(page);
-      }
+      new Promise(resolve=>{
+        alert(`${deleteNum}건의 게시물이 삭제되었습니다.\n${msg}`);
+        resolve(1);
+      }).then(()=>searchQna(page));
     }
   };
-  const searchQna = (page) => {
+  const searchQna = (page?:number) => {
     if (page && page <= pagination.pageCount) {
       setPage(page);
     } else {
       setPage('');
+      return false;
     }
 
-    const select = document.querySelector('#searchKey');
-    const selectedKey = select[select.selectedIndex].value;
-    const value = document.querySelector('[name="searchValue"]').value;
+    const select = document.querySelector('#searchKey') as HTMLSelectElement;
+    const selectedKey = (select[select.selectedIndex] as HTMLOptionElement).value;
+    const value = (document.querySelector('[name="searchValue"]') as HTMLInputElement).value;
 
-    const select2 = document.querySelector('#searchStatus');
-    const value2 = select2[select2.selectedIndex].value;
+    const select2 = document.querySelector('#searchStatus') as HTMLSelectElement;
+    const value2 = (select2[select2.selectedIndex] as HTMLOptionElement).value;
 
-    let query = { page };
+    type queryType = {
+      page: number;
+      filter?: string;
+    }
+    let query:queryType = { page };
 
     if (value.length !== 0) {
       if (selectedKey === '101') {
@@ -120,7 +126,7 @@ export default function QnaHome({ meta, data }) {
   };
 
   const thead = (
-    <thead align={'center'}>
+    <thead>
       <tr>
         <td key={'0'}>
           <input type="checkbox" />
@@ -133,7 +139,7 @@ export default function QnaHome({ meta, data }) {
     </thead>
   );
   const tbody = (
-    <tbody align={'center'}>
+    <tbody>
       {data?.length == 0 ? (
         <tr>
           <td colSpan={5} height={200}>
@@ -141,7 +147,7 @@ export default function QnaHome({ meta, data }) {
           </td>
         </tr>
       ) : (
-        data.map(({ id, attributes }) => {
+        data.map(({ id, attributes }:any) => {
           const qStatus = attributes.common_code.data.attributes.codeName;
 
           return (
@@ -208,7 +214,7 @@ export default function QnaHome({ meta, data }) {
           <input
             value={page}
             className="inputPage"
-            onChange={(e) => {
+            onChange={(e:ChangeEvent<HTMLInputElement>) => {
               tossPageNum(e);
             }}
           />{' '}
@@ -233,7 +239,7 @@ export default function QnaHome({ meta, data }) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query }: any) {
   const page = query.page ? query.page : 1;
   const res = await getQnas({
     pagination: {
