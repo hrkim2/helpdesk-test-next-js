@@ -19,7 +19,7 @@
     "noEmit": true,        /* Disable emitting files from a compilation. */
     "esModuleInterop": true,  /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
     "noImplicitAny": true,    /* Enable error reporting for expressions and declarations with an implied `any` type.. */
-    "strictNullChecks": true, /* When type checking, take into account `null` and `undefined`. */
+    "strictNullChecks": true, /* null을 허용하는 타입을 지정하려면 let a: string | null; 이렇게 하면됨 */
     "strictFunctionTypes": true, //function parameter type check
     "strictPropertyInitialization": true, //class constructor type check
     "resolveJsonModule": true,

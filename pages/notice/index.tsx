@@ -1,3 +1,3 @@
 export default function NoticeHome() {
-    return 'Notice';
+  return 'Notice';
 }

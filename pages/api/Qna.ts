@@ -1,7 +1,7 @@
 import { QueryManager, AxiosInstance } from './Config';
 
 const qna = {
-  getQnas: (query) => {
+  getQnas: (query: object) => {
     const defaultOption = {
       pageSize: 5,
       populate: 'common_code',
@@ -12,7 +12,7 @@ const qna = {
     const _query = queryManager.getAllQuery();
     return AxiosInstance.get(`qnas?${_query}`);
   },
-  deleteQna: async (id) => {
+  deleteQna: async (id: string) => {
     const result = await AxiosInstance.delete(`qnas/${id}`).then((res) => {
       return res.status === 200 ? 1 : 0;
     });
@@ -20,17 +20,17 @@ const qna = {
   },
 };
 
-export const getQnas = async (query) => {
+export const getQnas = async (query: object) => {
   const response = await qna.getQnas(query);
   return response.data;
 };
-export const deleteQnas = async (ids) => {
+export const deleteQnas = async (ids : string[]) => {
   const promise = ids.map(async (id) => {
     const deleteCnt = await qna.deleteQna(id);
     return deleteCnt;
   });
-  const deleteResult = await Promise.all(promise);
-  const deleteCnts = deleteResult.reduce((prev, curr) => {
+  const deleteResult:number[] = await Promise.all(promise);
+  const deleteCnts = deleteResult.reduce((prev, curr)=> {
     return prev + curr;
   });
 

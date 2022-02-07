@@ -1,10 +1,11 @@
 import Manager from './manager';
 import qs from 'qs';
+import {queryType, optionType,queryStringType} from './commonType';
 
 /**strapi document
  * https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/filtering-locale-publication.html#filtering
  */
-const STRAPI_QS = {
+const STRAPI_QS:queryStringType = {
   eq: '$eq',
   ne: '$ne',
   lt: '$lt',
@@ -25,26 +26,30 @@ const STRAPI_QS = {
   or: '$or',
   and: '$and',
 };
+interface _optionType extends optionType{
+  populate: string;
+}
 
 class Strapi extends Manager {
   populate;
-  constructor(query, option) {
+  constructor(query:queryType, option:_optionType) {
     super(query, option);
     this.populate = option.populate;
 
-    if (this.filter) {
-      let result = [];
+    if (this.filter && typeof this.filter == "string") {
+      let result:Array<object> = [];
       const filterObject = qs.parse(this.filter, { comma: true });
-      const filterNames = Object.keys(filterObject);
+      const filterNames:string[] = Object.keys(filterObject);
 
       filterNames.forEach((filterName) => {
-        const filterValues = filterObject[filterName];
+        const filterValues = filterObject[filterName] as string[];
 
         if (['and', 'or'].indexOf(filterName) >= 0) {
-          const filters = filterValues.map((option, i) => {
+          const filters = filterValues.map((option) => {
+            const keyName = STRAPI_QS[option[2]];
             return {
               [option[0]]: {
-                [STRAPI_QS[option[2]]]: option[1],
+                [keyName]: option[1],
               },
             };
           }, []);
@@ -84,7 +89,7 @@ class Strapi extends Manager {
   }
 
   getFilter() {
-    if (this.filter) {
+    if (this.filter && this.filter instanceof Array) {
       return this.filter
         .map((filter) => {
           return qs.stringify(filter);

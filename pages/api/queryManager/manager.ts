@@ -1,10 +1,12 @@
+import {queryType, optionType} from './commonType';
+
 export default class Manager {
   pagination;
   sort;
   fields;
   filter;
 
-  constructor(query, option) {
+  constructor(query: queryType, option: optionType) {
     if (query) {
       this.pagination =
         option && option.pageSize ? Object.assign(query.pagination, { pageSize: option.pageSize }) : query.pagination;

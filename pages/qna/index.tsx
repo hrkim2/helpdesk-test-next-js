@@ -67,7 +67,7 @@ export default function QnaHome({ meta, data }: any) {
     if (checkList.length == 0) {
       alert('삭제할 글을 선택하세요');
     } else {
-      const temp = checkList.map((checkItem) => {
+      const temp:string[] = checkList.map((checkItem) => {
         return checkItem.id.split('-')[1];
       });
       const deleteNum = await deleteQnas(temp);
