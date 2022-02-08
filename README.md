@@ -32,6 +32,7 @@ Next.js
 - 404 페이지 생성
 - update 구현
 - delete 구현 및 paging 로직 수정
+- test message
 
 ### 1.26
 
