@@ -118,6 +118,9 @@ export default function QnaHome({ meta, data }) {
       `/qna`,
     );
   };
+  const openQnaForm2 = (openName) => {
+    router.push('/qna/qnaForm2');
+  };
 
   const thead = (
     <thead align={'center'}>
@@ -195,6 +198,7 @@ export default function QnaHome({ meta, data }) {
         <Button text={'새글'} className={'btn-action-outlined'} onClickBtn={() => openQnaForm('new')} />
         <Button text={'수정'} className={'btn-action-outlined'} onClickBtn={() => openQnaForm('udt')} />
         <Button text={'삭제'} className={'btn-cancel-outlined'} onClickBtn={() => deleteQna()} />
+        <Button text={'jodit-react'} className={'btn-action-outlined'} onClickBtn={() => openQnaForm2()} />
       </div>
       <div className="lineClear"></div>
       <div className="tables">
