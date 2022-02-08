@@ -55,3 +55,11 @@ Next.js
   - git branch ts-test
   - git checkout ts-test
 - 신규 branch에 ts 작업 내용 반영 예정
+
+### 2.7
+- ts-test branch에 ts 작업
+- rich text library test(1) : summer note, tui editor
+
+### 2.8
+- rich text library test(2) : draft-wysiwyg
+- readme 커밋 하면서 github 연동 테스트 해보기..
