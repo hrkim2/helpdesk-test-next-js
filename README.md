@@ -74,6 +74,11 @@ Next.js
 - API 사전문서화
 
 ### 2.10
+
 - API 사전문서화
 - UI 자료 조사
 - Devops 연동 테스트(레포지토리를 잘못 연결함)
+
+### 2.11
+
+- tailwind 적용 및 button 생성
