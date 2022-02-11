@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../public/SG_Logo_Default.png';
+import logo from '../../public/SG_Logo_Default.png';
 import { useState } from 'react';
 
 type menuType = {

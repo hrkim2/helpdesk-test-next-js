@@ -1,9 +1,17 @@
 import Button from '../../Component/button';
 import { useRouter } from 'next/router';
+import { saveAs } from "file-saver";
 
 export default function QnaDetail({ data, page }:any) {
   const { qId, qTitle, qUser, qDetail } = data.attributes;
   const router = useRouter();
+
+  const saveFile = () => {
+    saveAs(
+      "../../public/SG_Logo_Default.png",
+      "SG_Logo_Default.png"
+    );
+  }
 
   return (
     <div>
@@ -29,6 +37,7 @@ export default function QnaDetail({ data, page }:any) {
             );
           }}
         />
+        <a onClick={saveFile} download>down test</a>
       </footer>
     </div>
   );

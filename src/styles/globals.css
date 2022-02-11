@@ -1,0 +1,151 @@
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import './custom_component.css';
+@import 'tailwindcss/utilities'; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*@import './SpoqaHanSansNeo/SpoqaHanSansNeo.css';*/
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 700;
+  src: local('Spoqa Han Sans Neo Bold'), url('./SpoqaHanSansNeo/bold/SpoqaHanSansNeo-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 500;
+  src: local('Spoqa Han Sans Neo Medium'), url('./SpoqaHanSansNeo/medium/SpoqaHanSansNeo-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 400;
+  src: local('Spoqa Han Sans Neo Regular'), url('./SpoqaHanSansNeo/regular/SpoqaHanSansNeo-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 300;
+  src: local('Spoqa Han Sans Neo Light'), url('./SpoqaHanSansNeo/light/SpoqaHanSansNeo-Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 100;
+  src: local('Spoqa Han Sans Neo Thin'), url('./SpoqaHanSansNeo/thin/SpoqaHanSansNeo-Thin.woff') format('woff');
+}
+
+/* * {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  box-sizing: border-box;
+} */
+/*
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background-color: #efefef;
+}
+body {
+  margin: 0 250px 0 150px;
+}
+body > div {
+  height: 100%;
+}
+body > div > .authorPageWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+nav {
+  color: #da291c;
+  height: 100%;
+}
+nav ul {
+  padding-left: 0;
+}
+nav ul li {
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px 5px 25px;
+  line-height: 35px;
+  list-style: none;
+  padding-left: 10px;
+  width: 150px;
+}
+nav ul li:hover {
+  background-color: #64ccc9;
+  color: #fff;
+}
+nav ul li.active {
+  background-color: #862a2a;
+  color: #fff;
+}
+.navToggle {
+  display: none;
+}
+section {
+  background-color: #fff;
+  height: 100%;
+  flex-grow: 2;
+}
+section > div {
+  margin: 40px;
+}
+header {
+  background-color: #4a9897;
+  color: #fff;
+  cursor: default;
+}
+header h1 {
+  margin: 0;
+  padding: 40px;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 1435px) {
+  body {
+    margin: 0 150px 0 50px;
+  }
+}
+@media (max-width: 1235px) {
+  body {
+    margin: 0 50px 0 0;
+  }
+}
+@media (max-width: 1000px) {
+  body {
+    margin: 0;
+  }
+  body > div > div {
+    display: block;
+  }
+  nav {
+    text-align: center;
+  }
+  nav ul {
+    display: none;
+  }
+  nav ul li {
+    width: 100%;
+  }
+  .navToggle {
+    display: inline-block;
+  }
+  section {
+    width: 100%;
+  }
+  .hideList {
+    display: none;
+  }
+}
+.showList {
+  display: block;
+} */

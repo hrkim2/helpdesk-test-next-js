@@ -10,7 +10,9 @@ export default function App({ Component, pageProps } : AppProps) {
 
   return path === '/' ? (
     <Login />
-  ) : (
+  ) : path.indexOf('components')>=0 ? (
+    <div className="font-seegene"><Component {...pageProps}/></div>
+  ) :(
     <Layout path={path}>
       <Component {...pageProps} />
     </Layout>

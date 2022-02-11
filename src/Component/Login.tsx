@@ -1,7 +1,7 @@
 
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import logo from '../public/SG_Logo_Default.png';
+import logo from '../../public/SG_Logo_Default.png';
 
 export default function Layout(){
     const router = useRouter();
