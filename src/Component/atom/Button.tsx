@@ -19,8 +19,7 @@ interface Props {
 
 interface buttonClassName {
     [type: string]: {[type2: string]: string};
-  }
-
+}
 
 const BTN_CLASS:buttonClassName = {
     "button": {
