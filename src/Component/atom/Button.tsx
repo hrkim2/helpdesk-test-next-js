@@ -13,6 +13,7 @@ interface Props {
     onclick: Function;
     size?: string;
     icon?: IconType;
+    width?: string;
     disabled?: boolean;
 }
 
@@ -23,14 +24,14 @@ interface buttonClassName {
 
 const BTN_CLASS:buttonClassName = {
     "button": {
-        "all": 'font-medium text-center rounded-lg mr-2 mb-2',
+        "all": 'font-medium text-center rounded-md mr-2 mb-2',
         "1": 'hover:opacity-80 hover:saturate-150 focus:opacity-75 focus:saturate-200 focus:text-efefef',
         "0": 'cursor-not-allowed opacity-40',
         "CONTAIN": 'text-white',
         "OUTLINE": 'hover:text-white focus:text-white border disabled:bg-white',
-        "xs": 'px-2.5 py-1.5 text-xs',
-        "sm": 'px-3   py-2   text-sm',
-        "md": 'px-4   py-2.5'
+        "xs": 'px-2.5 py-[4px] text-xs',
+        "sm": 'px-3   py-[6px] text-sm',
+        "md": 'px-4   py-[8px]'
     },
     "contain" : {
         "default":'bg-default hover:bg-default focus:bg-default',
@@ -48,12 +49,17 @@ const BTN_CLASS:buttonClassName = {
     }
 }
 
-const getButtonClass = (fillType:string, color:string, size:string, disable:boolean)=>{
+const getButtonClass = (fillType:string, color:string, size:string, disable:boolean, width?:string)=>{
     const btnClass = BTN_CLASS['button'];
     let type = fillType.toLowerCase();
     type = (type === 'contain' || type !== 'outline') ? 'contain' : 'outline';
+    const _button = btnClass["all"];
+    const _able = btnClass[disable?0:1];
+    const _type = btnClass[type.toUpperCase()];
+    const _size = btnClass[size.toLowerCase()] + (' '+width || '');
+    const _color = BTN_CLASS[type][color.toLowerCase()];
 
-    return btnClass["all"]+' '+btnClass[disable?0:1]+' '+btnClass[type.toUpperCase()]+' '+btnClass[size.toLowerCase()]+' '+BTN_CLASS[type][color.toLowerCase()];
+    return _button+' '+_able+' '+_type+' '+_size+' '+_color;
 }
 
 const getButtonText = (text?:string, icon?:IconType)=>{
@@ -94,11 +100,11 @@ const getButtonText = (text?:string, icon?:IconType)=>{
  * { iname, position (_left_ | right) }
  * @param disabled
  */
-const Button: FunctionComponent<Props> = ({text, fillType="contain", color='default', onclick, size='sm', icon, disabled=false})=>{
+const Button: FunctionComponent<Props> = ({text, fillType="contain", color='default', onclick, size='sm', icon, width, disabled=false})=>{
     return (
         <button
             type='button'
-            className={`${getButtonClass(fillType, color, size, disabled)}`}
+            className={`${getButtonClass(fillType, color, size, disabled, width)}`}
             onClick={()=>onclick()}
             disabled={disabled}
         >{getButtonText(text, icon)}

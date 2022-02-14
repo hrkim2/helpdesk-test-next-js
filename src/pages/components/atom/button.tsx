@@ -1,5 +1,6 @@
 import Button from '../../../Component/atom/Button';
-import { faFloppyDisk, faMagnifyingGlass, faTrashCan, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import {SearchButton, GotoListButton, WriteButton, FormSubmitButton,
+  UpdateButton, DeleteButton, ReplyButton, BackToButton } from '../../../Component/atom/Buttons';
 
 export default function Buttons() {
 
@@ -85,34 +86,6 @@ export default function Buttons() {
       </div>
       <div>
         <Button
-        fillType='outline'
-        size='sm'
-        icon={{iname: faFloppyDisk}}
-        onclick={()=>{}}
-        />
-        <Button
-        fillType='outline'
-        size='sm'
-        icon={{iname: faMagnifyingGlass}}
-        onclick={()=>{}}
-        />
-        <Button
-        fillType='outline'
-        text='보내기'
-        size='sm'
-        icon={{iname: faPaperPlane, position: "right"}}
-        onclick={()=>{}}
-        />
-        <Button
-        fillType='outline'
-        text='삭제'
-        size='sm'
-        icon={{iname: faTrashCan}}
-        onclick={()=>{}}
-        />
-      </div>
-      <div>
-        <Button
         text='active'
         size='sm'
         onclick={()=>{}}
@@ -131,6 +104,15 @@ export default function Buttons() {
         disabled={true}
         />
       </div>
+      <div><SearchButton onClick={()=>{console.log('search button')}}/></div>
+      <div><GotoListButton onClick={()=>{console.log('list button')}}/></div>
+      <div><WriteButton onClick={()=>{console.log('write button')}}/></div>
+      <div><FormSubmitButton onClick={()=>{console.log('submit button')}} text={'등록'}/></div>
+      <div><FormSubmitButton onClick={()=>{console.log('submit button')}} text={'수정'}/></div>
+      <div><UpdateButton onClick={()=>{console.log('update button')}}/></div>
+      <div><DeleteButton onClick={()=>{console.log('delete button')}}/></div>
+      <div><ReplyButton onClick={()=>{console.log('reply button')}}/></div>
+      <div><BackToButton onClick={()=>{console.log('go back button')}}/></div>
     </>
   );
 }
