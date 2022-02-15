@@ -1,4 +1,5 @@
 import InputText from '../../../Component/atom/InputText';
+import InputFile from '../../../Component/atom/InputFile';
 import Label from '../../../Component/atom/Label';
 import { useState, ChangeEvent } from 'react';
 
@@ -37,6 +38,10 @@ export default function Buttons() {
             <InputText feature={{name: 'project Id', placeHolder: 'addClass를 사용했다', addClass:'inline w-40 m-5'}}/>
             <InputText feature={{name: 'project Id', placeHolder: 'addClass를 사용했다2', addClass:'inline w-60'}}/>
           </div>
+      </div>
+      <div className="m-3">
+        <div className='text-xl font-bold'>INPUT FILE</div>
+        <InputFile/>
       </div>
     </>
   );
