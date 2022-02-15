@@ -9,7 +9,7 @@ export default function Buttons() {
         <input type='text' id='name' placeholder='이름 입력쓰'/>
       </div>
       <div>
-        <Label text={'주소'} forId={'address'} position={'inline'}/>
+        <Label text={'주소'} forId={'address'} addClass={'text-warning'}/>
         <input type='text' id='address' placeholder='서울시 송파구'/>
       </div>
       <div>

@@ -3,14 +3,12 @@ import { FunctionComponent } from 'react';
 interface Props {
     text?: string;
     forId?: string;
-    position?: string;
     requied?: boolean;
+    addClass?: string;
 }
 
-const getClassName = (position:string)=>{
-    const classSufix = position==='block' ? 'mb-1 block' : 'mr-2';
-
-    return `text-black select-none tracking-widest ${classSufix}`;
+const getClassName = (addClass='')=>{    
+    return `mb-1 block select-none tracking-widest ${addClass}`;
 }
 
 const getLabelText = (text:string, requied: boolean)=>{
@@ -27,15 +25,15 @@ const getLabelText = (text:string, requied: boolean)=>{
 /**
  * @param text
  * @param forId
- * @param position block | inline
  * @param requied
+ * @param addClass
  */
-const Label: FunctionComponent<Props> = ({text, forId, position='block', requied=false})=>{
+const Label: FunctionComponent<Props> = ({text, forId, requied=false, addClass})=>{
     if(text){
         return (
         <label
             htmlFor={forId}
-            className={getClassName(position)}
+            className={getClassName(addClass)}
         >
             {getLabelText(text, requied)}
         </label>
