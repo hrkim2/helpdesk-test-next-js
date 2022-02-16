@@ -13,11 +13,15 @@ interface Props {
 }
 
 const getClassName = (addClass='')=>{
-    const text    = 'text-sm text-black opacity-90 focus:opacity-100';
-    const size    = 'w-full py-1.5 px-0';
-    const feature = 'block bg-transparent border-0 border-b-2 border-cancel focus:outline-none focus:ring-0 focus:border-default';
+    const addList = addClass.split(' ');
+    const width   = addList.filter(classname=>classname.startsWith('w-')).length>0 ? '' : 'w-full';
+    const text    = addList.filter(classname=>classname.startsWith('text-')).length>0 ? '' : 'text-sm text-black';
+    
+    const font    = `${text} opacity-90 focus:opacity-100`;
+    const size    = `${width} py-1.5 px-0`;
+    const feature = `block bg-transparent border-0 border-b-2 border-cancel focus:outline-none focus:ring-0 focus:border-default`;
 
-    return `${text} ${size} ${feature} ${addClass}`;
+    return `${font} ${size} ${feature} ${addClass}`;
 }
 
 const getValidatePattern = (validType:string='')=>{
