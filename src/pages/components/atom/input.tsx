@@ -41,7 +41,10 @@ export default function Buttons() {
       </div>
       <div className="m-3">
         <div className='text-xl font-bold'>INPUT FILE</div>
-        <InputFile/>
+        <div className='font-medium my-3'>multiple</div>
+        <InputFile name='file_helpdesk' multiple={true} accept={{ext:'image/*, txt',size:10}} addClass={'w-96'}/>
+        <div className='font-medium my-3'>single</div>
+        <InputFile id='file_helpdesk' addClass={'w-96'} accept={{ext:'txt, png',size:10}}/>
       </div>
     </>
   );
