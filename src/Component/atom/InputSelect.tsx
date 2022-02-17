@@ -65,6 +65,12 @@ function getSelected(options:Option[], value:string|number){
     }
 }
 
+/**
+ * @param id
+ * @param options
+ * @param value
+ * @param addClass
+ */
 const InputSelect:FunctionComponent<Props> = ({id='', options=[], value='', addClass=''})=>{
   const [selected, setSelected] = useState(getSelected(options, value));
 
