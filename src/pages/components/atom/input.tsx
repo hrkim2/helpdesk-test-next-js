@@ -1,8 +1,18 @@
 import InputText from '../../../Component/atom/InputText';
 import InputFile from '../../../Component/atom/InputFile';
 import InputTextArea from '../../../Component/atom/InputTextArea';
+import InputSelect from '../../../Component/atom/InputSelect';
 import Label from '../../../Component/atom/Label';
 import { useState, ChangeEvent } from 'react';
+
+const selectboxList = [
+  { text: 'Wade Cooper', value:'e1' },
+  { text: 'Arlene Mccoy', value:'e2' },
+  { text: 'Devon Webb', value:'e3' },
+  { text: 'Tom Cook', value:'e4' },
+  { text: 'Tanya Fox', value:'e5' },
+  { text: 'Hellen Schmidt', value:'e6' }
+];
 
 export default function Inputs() {
     const [title, setTitle] = useState('state.value');
@@ -62,6 +72,11 @@ export default function Inputs() {
           rows={3}
           resize={false}
         />
+      </div>
+      <div className="m-3">
+        <div className='text-xl font-bold'>SELECT BOX(DROP DOWN)</div>
+          <InputSelect options={selectboxList} value='e4' addClass='w-60 inline-flex mr-2'/>
+          <InputSelect id='test' options={selectboxList} value='e2' addClass='w-96 inline-flex'/>
       </div>
     </>
   );

@@ -1,13 +1,6 @@
-/* @import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import './custom_component.css';
-@import 'tailwindcss/utilities'; */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/*@import './SpoqaHanSansNeo/SpoqaHanSansNeo.css';*/
 
 @font-face {
   font-family: 'Spoqa Han Sans Neo';
