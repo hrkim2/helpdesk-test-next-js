@@ -2,6 +2,8 @@ import InputText from '../../../Component/atom/InputText';
 import InputFile from '../../../Component/atom/InputFile';
 import InputTextArea from '../../../Component/atom/InputTextArea';
 import InputSelect from '../../../Component/atom/InputSelect';
+import Checkbox from '../../../Component/atom/Checkbox';
+import Radiobox from '../../../Component/atom/Radiobox';
 import Label from '../../../Component/atom/Label';
 import { useState, ChangeEvent } from 'react';
 
@@ -60,6 +62,22 @@ export default function Inputs() {
         <InputFile name='file_helpdesk' multiple={true} accept={{ext:'image/*, txt',size:10}} addClass={'w-96'}/>
         <div className='font-medium my-3'>single</div>
         <InputFile id='file_helpdesk' addClass={'w-96'} accept={{ext:'txt, png',size:10}}/>
+      </div>
+      <div className="m-3">
+        <div className='float-left w-96'>
+          <div className='text-xl font-bold'>CHECK BOX</div>
+          <Checkbox id='check0' name='test'/><Label forId='check0' text='테스트0' addClass='inline-flex ml-2'/>
+          <br/>
+          <Checkbox id='check1' name='test'/><Label forId='check1' text='테스트1' addClass='inline-flex ml-2'/>
+        </div>
+        <div className='float-left w-96'>
+          <div className='text-xl font-bold'>RADIO BOX</div>
+          <Radiobox id='radio0' name='test'/><Label forId='radio0' text='테스트0' addClass='inline-flex ml-2'/>
+          <br/>
+          <Radiobox id='radio1' name='test'/><Label forId='radio1' text='테스트1' addClass='inline-flex ml-2'/>
+        </div>
+        <div className='clear-both'>
+        </div>
       </div>
       <div className="m-3">
         <div className='text-xl font-bold'>TEXT AREA</div>
