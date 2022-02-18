@@ -1,4 +1,4 @@
-import {Badge, ErrorBadge, QuestionBadge, RequestBadge} from '../../../Component/atom/Badge';
+import {Badge, ErrorBadge, QuestionBadge, RequestBadge} from '../../../Component/nt/Badge';
 
 export default function Badges() {
 

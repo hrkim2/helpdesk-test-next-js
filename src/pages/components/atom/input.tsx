@@ -1,10 +1,10 @@
-import InputText from '../../../Component/atom/InputText';
-import InputFile from '../../../Component/atom/InputFile';
-import InputTextArea from '../../../Component/atom/InputTextArea';
-import InputSelect from '../../../Component/atom/InputSelect';
-import Checkbox from '../../../Component/atom/Checkbox';
-import Radiobox from '../../../Component/atom/Radiobox';
-import Label from '../../../Component/atom/Label';
+import InputText from '../../../Component/nt/input/InputText';
+import InputFile from '../../../Component/nt/input/InputFile';
+import InputTextArea from '../../../Component/nt/input/InputTextArea';
+import InputSelect from '../../../Component/nt/input/InputSelect';
+import Checkbox from '../../../Component/nt/input/Checkbox';
+import Radiobox from '../../../Component/nt/input/Radiobox';
+import Label from '../../../Component/nt/Label';
 import { useState, ChangeEvent } from 'react';
 
 const selectboxList = [
