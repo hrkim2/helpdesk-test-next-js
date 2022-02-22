@@ -1,39 +1,33 @@
-import { FunctionComponent } from 'react';
-import { Editor as TUI, Viewer as TUI_VIEW } from '@toast-ui/react-editor';
+import { forwardRef, RefObject } from 'react';
+import { Editor, EditorProps } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-//TODO 2 에디터 내부 폰트 지정 가능하도록 옵션 확인
-//TODO 3 높이, focus 색상 등등 기타 옵션 확인
+export interface DefaultEditorProps extends EditorProps {
+  forwardedRef?: RefObject<Editor>;
+}
+export {Editor as EditorType};
 
-interface Props {
-    initialValue?: string;
-}
-const Editor: FunctionComponent<Props> = ({initialValue})=>{
-    //const editorRef = createRef();
-
-    return <TUI
-        placeholder="내용을 작성해주세요."
-        initialValue={initialValue}
-        previewStyle="vertical"
-        height="300px"
-        language="ko"
-        initialEditType="wysiwyg"
-        useCommandShortcut={true}
-        autofocus={false}
-        toolbarItems={[
-            ['heading', 'bold', 'italic', 'strike'],
-            ['hr', 'quote'],
-            ['ul', 'ol'],
-            ['table', 'image', 'link'],
-            ['scrollSync'],
-        ]}
-        hideModeSwitch={true}
-    />;
-}
-const Viewer: FunctionComponent<Props> = ({initialValue})=>{
-    return <TUI_VIEW
-        initialValue={initialValue}
-    />;
-}
+export default forwardRef<Editor|undefined, DefaultEditorProps>((props, ref)=>{
+  const { placeholder, initialValue, height, forwardedRef, ...others } = props;
   
-export {Editor as DefaultEditor, Viewer as DefaultViewer};
+  return <Editor
+    {...others}
+    placeholder={placeholder}
+    initialValue={initialValue}
+    previewStyle="vertical"
+    height={height || "300px"}
+    initialEditType="wysiwyg"
+    useCommandShortcut={true}
+    language="ko"
+    autofocus={false}
+    toolbarItems={[
+        ['heading', 'bold', 'italic', 'strike'],
+        ['hr', 'quote'],
+        ['ul', 'ol'],
+        ['table', 'image', 'link'],
+        ['scrollSync'],
+    ]}
+    hideModeSwitch={true}
+    ref={forwardedRef}
+  />
+});

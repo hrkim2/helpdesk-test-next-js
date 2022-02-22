@@ -6,9 +6,9 @@ import logo from '../../public/SG_Logo_Default.png';
 export default function Layout(){
     const router = useRouter();
 
-    function login(e: MouseEvent & {target: EventTarget }){
+    function login(e: React.MouseEvent<HTMLInputElement>){
         e.preventDefault();
-        const frm = e.target.form;
+        const frm = (e.target as HTMLFormElement).form;
         const user = (frm.querySelector('#user') as HTMLInputElement)?.value;
         const password = (frm.querySelector('#password') as HTMLInputElement)?.value;
 
