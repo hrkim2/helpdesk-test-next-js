@@ -1,6 +1,6 @@
-import Button from '../../../Component/atom/Button';
+import Button from '../../../Component/nt/Button';
 import {SearchButton, GotoListButton, WriteButton, FormSubmitButton,
-  UpdateButton, DeleteButton, ReplyButton, BackToButton } from '../../../Component/atom/Buttons';
+  UpdateButton, DeleteButton, ReplyButton, BackToButton } from '../../../Component/nt/Buttons';
 
 export default function Buttons() {
 

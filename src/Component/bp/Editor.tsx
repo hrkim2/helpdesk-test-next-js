@@ -1,6 +1,6 @@
 import { Editor as EditorType, EditorProps } from '@toast-ui/react-editor';
 import dynamic, { LoaderComponent } from 'next/dynamic';
-import {forwardRef, MutableRefObject, useRef, useCallback} from 'react';
+import {forwardRef, MutableRefObject, RefObject, useRef, useCallback} from 'react';
 import { DefaultEditorWithForwardedProps } from '../nt/Editor2';
 
 interface EditorPropsWithHandlers extends EditorProps{
@@ -9,26 +9,26 @@ interface EditorPropsWithHandlers extends EditorProps{
 
 const DefaultEditor = dynamic<DefaultEditorWithForwardedProps>(() => import('../nt/Editor2') as LoaderComponent, { ssr: false });
 const EditorWithForwardedRef = forwardRef<EditorType|undefined, EditorPropsWithHandlers>((props, ref)=>{
-  return <DefaultEditor {...props} forwardedRef={ref as MutableRefObject<EditorType>} />
+  return <DefaultEditor {...props} forwardedRef={ref as RefObject<EditorType>} />
+  //return <DefaultEditor {...props} forwardedRef={ref as MutableRefObject<EditorType>} />
 });
 
 interface Props extends EditorProps {
-  onChange(value: string): void;
+  onBlur(value: string): void;
 }
 
 const Editor: React.FC<Props> = (props) => {
   const { initialValue, height } = props;
-
-  const editorRef = useRef<EditorType>();
+  
+  const editorRef = useRef<EditorType>(null);
   const handleChange = useCallback(() => {
     if (!editorRef.current) {
       return;
     }
-
+    
     const instance = editorRef.current.getInstance();
-
-    props.onChange(instance.getHTML());
-  }, [props, editorRef]);
+    props.onBlur(instance.getHTML());
+  }, [props]);
 
   return <div>
     <EditorWithForwardedRef
@@ -49,7 +49,7 @@ const Editor: React.FC<Props> = (props) => {
           ['table', 'image', 'link'],
           ['scrollSync'],
       ]}
-      onChange={handleChange}
+      onBlur={handleChange}
       hideModeSwitch={true}
     />
   </div>;

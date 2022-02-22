@@ -1,4 +1,4 @@
-import Label from '../../../Component/atom/Label';
+import Label from '../../../Component/nt/Label';
 
 export default function Buttons() {
 
