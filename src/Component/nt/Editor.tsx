@@ -2,13 +2,13 @@ import { forwardRef, RefObject } from 'react';
 import { Editor, EditorProps } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-export interface DefaultEditorProps extends EditorProps {
-  forwardedRef?: RefObject<Editor>;
-}
-export {Editor as EditorType};
+export interface DefaultEditorProps extends EditorProps{
+  forwardRef?: RefObject<Editor>;
+};
+export { Editor as EditorType };
 
 export default forwardRef<Editor|undefined, DefaultEditorProps>((props, ref)=>{
-  const { placeholder, initialValue, height, forwardedRef, ...others } = props;
+  const { placeholder, initialValue, height, forwardRef,  ...others } = props;
   
   return <Editor
     {...others}
@@ -28,6 +28,6 @@ export default forwardRef<Editor|undefined, DefaultEditorProps>((props, ref)=>{
         ['scrollSync'],
     ]}
     hideModeSwitch={true}
-    ref={forwardedRef}
+    ref={forwardRef}
   />
 });

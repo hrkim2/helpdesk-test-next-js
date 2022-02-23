@@ -26,7 +26,7 @@ export default function EditorTemplate() {
 
   return <>
     <div className='font-medium text-lg'>😀 질문 내용</div>
-    <DefaultEditor {...props} forwardedRef={content} />
+    <DefaultEditor {...props} forwardRef={content} />
     <div className='m-3'>
       {/* <Viewer initialValue={TEMPLATE}/> */}
     </div>

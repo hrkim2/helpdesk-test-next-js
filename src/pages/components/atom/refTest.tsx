@@ -15,18 +15,17 @@
 //   );
 // }
 
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, InputHTMLAttributes, useRef } from "react";
 
-const Input = forwardRef((props, ref) => {
+const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
   return <input type="text" {...props} ref={ref} />;
 });
 
 export default function Field() {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function handleFocus() {
-      const _ = inputRef.current as HTMLInputElement;
-    console.log(_?.focus());
+    inputRef.current?.focus();
   }
 
   return (
