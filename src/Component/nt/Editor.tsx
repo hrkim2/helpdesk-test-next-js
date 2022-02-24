@@ -7,7 +7,7 @@ export interface DefaultEditorProps extends EditorProps{
 };
 export { Editor as EditorType };
 
-export default forwardRef<Editor|undefined, DefaultEditorProps>((props, ref)=>{
+export default forwardRef<Editor|undefined, DefaultEditorProps>((props)=>{
   const { placeholder, initialValue, height, forwardRef,  ...others } = props;
   
   return <Editor
@@ -29,5 +29,8 @@ export default forwardRef<Editor|undefined, DefaultEditorProps>((props, ref)=>{
     ]}
     hideModeSwitch={true}
     ref={forwardRef}
-  />
+    linkAttributes={{
+      target: '_blank'
+    }}
+  />;
 });
