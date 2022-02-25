@@ -14,24 +14,35 @@ export default function App({ Component, pageProps } : AppProps) {
   ) : path.indexOf('components')>=0 ? (
     <div className="font-seegene">
       <div className='m-2'>
-        `menu list`
-        <ul>
-          <Link key='0' href='/components/atom/button'>
-            <li className='cursor-pointer hover:bg-efefef'>button</li>
-          </Link>
-          <Link key='1' href='/components/atom/badge'>
-            <li className='cursor-pointer hover:bg-efefef'>badge</li>
-          </Link>
-          <Link key='2' href='/components/atom/input'>
-            <li className='cursor-pointer hover:bg-efefef'>input</li>
-          </Link>
-          <Link key='3' href='/components/atom/label'>
-            <li className='cursor-pointer hover:bg-efefef'>label</li>
-          </Link>
-          <Link key='4' href='/components/atom/editor'>
-            <li className='cursor-pointer hover:bg-efefef'>editor</li>
-          </Link>
-        </ul>
+        <div>`menu list`</div>
+        <div className='inline-block w-1/4'>
+          <div className='block italic text-lg font-bold'>atom</div>
+          <ul className='m-1 p-3 bg-warning/25'>
+            <Link key='0' href='/components/atom/button'>
+              <li className='cursor-pointer hover:bg-warning'>button</li>
+            </Link>
+            <Link key='1' href='/components/atom/badge'>
+              <li className='cursor-pointer hover:bg-warning'>badge</li>
+            </Link>
+            <Link key='2' href='/components/atom/input'>
+              <li className='cursor-pointer hover:bg-warning'>input</li>
+            </Link>
+            <Link key='3' href='/components/atom/label'>
+              <li className='cursor-pointer hover:bg-warning'>label</li>
+            </Link>
+            <Link key='4' href='/components/atom/editor'>
+              <li className='cursor-pointer hover:bg-warning'>editor</li>
+            </Link>
+          </ul>
+        </div>
+        <div className='inline-block w-1/4'>
+          <div className='block italic text-lg font-bold'>molecule</div>
+          <ul className='m-1 p-3 bg-success/25'>
+            <Link key='0' href='/components/molecule/breadcrumb'>
+              <li className='cursor-pointer hover:bg-success'>breadcrumb</li>
+            </Link>
+          </ul>
+        </div>
       </div>
       <Component {...pageProps}/>
     </div>
