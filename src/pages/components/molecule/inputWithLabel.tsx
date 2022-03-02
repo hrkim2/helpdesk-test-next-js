@@ -31,9 +31,11 @@ export default function InputPlusLabel(){
             <InputFormWithLabel
                 type='inputSelect'
                 id='input_select'
-                options={[{text : 'test2', value: 2}, {text: 'test1', value: 1}]}
-                value={2}
-                labelText='테스트 종류'
+                options={[{text : '질문', value: 1}, {text: '요청', value: 2}, {text: '오류', value: 3}]}
+                value={1}
+                width='w-[100px]'
+                labelText='게시글 타입'
+                labelRequire={true}
             />
             <InputFormWithLabelTop
                 type='inputSelect'

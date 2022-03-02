@@ -59,11 +59,11 @@ export default function EditorTemplate() {
     placeholder: '프로젝트 id를 추가해주시면 답변에 도움이 됩니다.'
   };
 
-  return <>
+  return <div className='w-[600px] m-3'>
     <div className='font-medium text-lg'>😀 질문 내용</div>
     <DefaultEditor {...props} forwardRef={content} />
-    <div>
+    <div className='bg-default/50 pt-2.5 pr-2.5 flex flex-row-reverse'>
       <FormSubmitButton text='등록' onClick={onSubmit}/>
     </div>
-  </>;
+  </div>;
 }
