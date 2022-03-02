@@ -304,8 +304,8 @@ export function MultipleInputFormWithLabel(props: any){
     }
 
     return <>
-    {list?.map(item=>{
-        return <InputWithLabel input={item.inputProp} label={item.labelProp}/>;
+    {list?.map((item, i)=>{
+        return <InputWithLabel key={i} input={item.inputProp} label={item.labelProp}/>;
     })}
     </>;
 }
