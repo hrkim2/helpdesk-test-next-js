@@ -60,6 +60,39 @@ const labelForSelectboxTop = {
     addClass: 'font-bold text-md'
 }
 
+const inputfile = {
+    inputFile: true,
+    id: 'input_file',
+    multiple: false,
+    accept: {
+        size: 10,
+        sizeUnit: 'KB',
+        ext: 'png, jpg'
+    },
+    addClass: 'peer ml-[135px] w-96'
+}
+const labelForInputfile = {
+    text: '첨부 파일 업로드',
+    forId: 'input_file',
+    position: 'left',
+    addClass: 'font-bold text-md'
+}
+const inputfileTop = {
+    inputFile: true,
+    id: 'input_file_top',
+    multiple: true,
+    accept: {
+        ext: 'pptx,xls'
+    },
+    addClass: 'peer mt-7 w-96'
+}
+const labelForInputfileTop = {
+    text: '첨부 파일 업로드2',
+    forId: 'input_file_top',
+    position: 'top',
+    addClass: 'font-bold text-md'
+}
+
 
 const textarea = {
     inputTextArea: true,
@@ -168,6 +201,11 @@ export default function InputPlusLabel(){
             <span className='italic text-lg font-semibold'>selecbox with label</span>
             <InputWithLabel input={selectbox} label={labelForSelectbox}/>
             <InputWithLabel input={selectboxTop} label={labelForSelectboxTop}/>
+        </div>
+        <div className='m-3'>
+            <span className='italic text-lg font-semibold'>inputfile with label</span>
+            <InputWithLabel input={inputfile} label={labelForInputfile}/>
+            <InputWithLabel input={inputfileTop} label={labelForInputfileTop}/>
         </div>
         <div className='m-3'>
             <span className='italic text-lg font-semibold'>textarea with label</span>

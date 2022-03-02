@@ -130,7 +130,7 @@ const InputFile: FunctionComponent<Props> = ({name='file', id='file', multiple, 
                 />;
             })}
         </div>
-        <div className="m-1 text-xs text-black cursor-default">
+        <div className={`m-1 text-xs text-black cursor-default`}>
             {_accept ? _accept.text : ''}
         </div>
     </>;
