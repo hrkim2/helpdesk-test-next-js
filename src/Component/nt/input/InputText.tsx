@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-interface Props {
+export interface Props {
     feature: {
         value?: string | number;
         name?: string;

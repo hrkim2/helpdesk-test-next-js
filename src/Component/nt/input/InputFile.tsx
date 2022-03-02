@@ -6,7 +6,7 @@ interface Accept {
     ext?: string;
     text?: string;
 }
-interface Props {
+export interface Props {
     name?: string;
     id?: string;
     multiple?: boolean;

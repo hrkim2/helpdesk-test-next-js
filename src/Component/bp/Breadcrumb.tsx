@@ -69,7 +69,8 @@ const Label: FunctionComponent<LabelProps> = ({text, url='', leafLevel, addClass
 }
 
 /**
- * @param text
+ * @param hierarchy
+ * @param addClass
  */
  const BreadCrumb: FunctionComponent<Props> = ({hierarchy, addClass})=>{
     const list = hierarchy.sort((level_a, level_b)=>level_a.seq-level_b.seq);

@@ -1,16 +1,18 @@
 import { FunctionComponent } from 'react';
 
-interface Props {
+export interface Props {
     name?: string;
     id?: string;
+    addClass?: string;
+    checked?: boolean;
 }
 
 /**
  * @param name
  * @param id
  */
-const Radiobox: FunctionComponent<Props> = ({name='checkbox', id='checkbox'})=>{
-    return <input type="radio" className="h-5 w-5 accent-default" name={name} id={id}/>;
+const Radiobox: FunctionComponent<Props> = ({name='checkbox', id='checkbox', addClass, checked=false})=>{
+    return <input type="radio" defaultChecked={checked} className={`h-5 w-5 accent-default ${addClass}`} name={name} id={id}/>;
 }
 
 export default Radiobox;

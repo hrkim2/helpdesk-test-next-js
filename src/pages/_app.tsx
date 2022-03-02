@@ -41,6 +41,9 @@ export default function App({ Component, pageProps } : AppProps) {
             <Link key='0' href='/components/molecule/breadcrumb'>
               <li className='cursor-pointer hover:bg-success'>breadcrumb</li>
             </Link>
+            <Link key='1' href='/components/molecule/inputWithLabel'>
+              <li className='cursor-pointer hover:bg-success'>inputWithLabel</li>
+            </Link>
           </ul>
         </div>
       </div>

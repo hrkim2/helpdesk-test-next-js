@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-interface Props {
+export interface Props {
     name?: string;
     id?: string;
     placeHolder?: string;

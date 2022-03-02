@@ -56,7 +56,7 @@ export default function Inputs() {
             <InputText feature={{name: 'project Id', placeHolder: 'addClass를 사용했다2', addClass:'inline w-60'}} onChange={()=>{}}/>
           </div>
       </div>
-      <div className="m-3 hidden">
+      <div className="m-3">
         <div className='text-xl font-bold'>INPUT FILE</div>
         <div className='font-medium my-3'>multiple</div>
         <InputFile name='file_helpdesk' multiple={true} accept={{ext:'image/*, txt',size:10}} addClass={'w-96'}/>

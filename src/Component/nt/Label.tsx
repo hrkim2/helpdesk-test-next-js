@@ -1,25 +1,16 @@
 import { FunctionComponent } from 'react';
 
-interface Props {
+export interface Props {
     text?: string;
     forId?: string;
     requied?: boolean;
     addClass?: string;
+    onClick?: Function;
 }
 
-const getClassName = (addClass='')=>{    
-    return `mb-1 block select-none tracking-widest ${addClass}`;
-}
-
-const getLabelText = (text:string, requied: boolean)=>{
-    if(requied){
-        return <>
-            <span>{text}</span>
-            <span className='text-danger pt-2.5 pl-1 text-sm'>*</span>
-        </>;
-    }else{
-        return <span>{text}</span>;
-    }
+const getClassName = (addClass='', requied: boolean)=>{  
+    const requireMark = requied ? "after:content-['*'] after:ml-0.5 after:text-danger after:text-sm" : "";
+    return `mb-1 block select-none tracking-widest ${addClass} ${requireMark}`;
 }
 
 /**
@@ -28,14 +19,15 @@ const getLabelText = (text:string, requied: boolean)=>{
  * @param requied
  * @param addClass
  */
-const Label: FunctionComponent<Props> = ({text, forId, requied=false, addClass})=>{
+const Label: FunctionComponent<Props> = ({text, forId, requied=false, addClass, onClick})=>{
     if(text){
         return (
         <label
             htmlFor={forId}
-            className={getClassName(addClass)}
+            className={getClassName(addClass, requied)}
+            onClick={()=>onClick&&onClick()}
         >
-            {getLabelText(text, requied)}
+            {text}
         </label>
         );
     }else{

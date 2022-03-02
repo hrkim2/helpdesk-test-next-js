@@ -8,7 +8,7 @@ interface Option {
     value?: string | number;
 }
 
-interface Props {
+export interface Props {
     id?: string;
     options?: Option[];
     value?: string | number;
@@ -78,7 +78,7 @@ const InputSelect:FunctionComponent<Props> = ({id='', options=[], value='', addC
     <div className={addClass}>
       <SelectHidden id={id} value={selected.value} options={options} />
       <Listbox value={selected} onChange={setSelected}>
-        <div className="relative mt-1 w-full">
+        <div className="relative mt-1 w-full" id={`${id}_listbox`}>
           <Listbox.Button className={CLASS_NAME.button()}>
             <span className="inline truncate">{selected.text}</span>
             <FontAwesomeIcon icon={faAngleDown} className='absolute right-3 top-2.5 content-center'/>
