@@ -14,7 +14,7 @@ export default function App({ Component, pageProps } : AppProps) {
   ) : path.indexOf('components')>=0 ? (
     <div className="font-seegene">
       <div className='m-2'>
-        <div>`menu list`</div>
+        <div>`component list`</div>
         <div className='inline-block w-1/4'>
           <div className='block italic text-lg font-bold'>atom</div>
           <ul className='m-1 p-3 bg-warning/25'>
