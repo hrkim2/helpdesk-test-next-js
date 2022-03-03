@@ -13,6 +13,7 @@ export interface Props {
     options?: Option[];
     value?: string | number;
     addClass?: string;
+    onChange?: Function;
 }
 
 const DATA_NOT_FOUNDED = '조회된 데이터가 없습니다.';
@@ -35,7 +36,7 @@ const CLASS_NAME = {
     }
 }
 
-const SelectHidden = ({id='', value='', options=[]}:Props)=>{
+const SelectHidden = ({id='', value='', options=[], onChange}:Props)=>{
   const OptionList = ()=>{
       return <>
           {options.map((option, i)=>{
@@ -49,7 +50,7 @@ const SelectHidden = ({id='', value='', options=[]}:Props)=>{
   return <select
       id={`${id || 'select_box'}`}
       value={value}
-      onChange={()=>{}}
+      onChange={(e)=>onChange&&onChange(e)}
       className='hidden'
   >
       <OptionList/>
@@ -70,13 +71,14 @@ function getSelected(options:Option[], value:string|number){
  * @param options
  * @param value
  * @param addClass
+ * @param onChange
  */
-const InputSelect:FunctionComponent<Props> = ({id='', options=[], value='', addClass=''})=>{
+const InputSelect:FunctionComponent<Props> = ({id='', options=[], value='', addClass='', onChange})=>{
   const [selected, setSelected] = useState(getSelected(options, value));
 
   return (
     <div className={addClass}>
-      <SelectHidden id={id} value={selected.value} options={options} />
+      <SelectHidden id={id} value={selected.value} options={options} onChange={onChange} />
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1 w-full" id={`${id}_listbox`}>
           <Listbox.Button className={CLASS_NAME.button()}>

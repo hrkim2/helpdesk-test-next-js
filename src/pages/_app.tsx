@@ -44,6 +44,9 @@ export default function App({ Component, pageProps } : AppProps) {
             <Link key='1' href='/components/molecule/inputWithLabel'>
               <li className='cursor-pointer hover:bg-success'>inputWithLabel</li>
             </Link>
+            <Link key='2' href='/components/molecule/pagination'>
+              <li className='cursor-pointer hover:bg-success'>pagination</li>
+            </Link>
           </ul>
         </div>
       </div>
