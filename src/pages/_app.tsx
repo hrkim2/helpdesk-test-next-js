@@ -50,6 +50,9 @@ export default function App({ Component, pageProps } : AppProps) {
             <Link key='3' href='/components/molecule/collapseList'>
               <li className='cursor-pointer hover:bg-success'>collapse list</li>
             </Link>
+            <Link key='4' href='/components/molecule/table'>
+              <li className='cursor-pointer hover:bg-success'>table</li>
+            </Link>
           </ul>
         </div>
       </div>
